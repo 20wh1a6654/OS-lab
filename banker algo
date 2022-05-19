@@ -1,0 +1,64 @@
+#include<stdio.h>
+int main()
+{
+int avail[10];
+int max[10][10];
+int alloc[10][10];
+int i,j,n,r,p,R,k;
+int status[10];
+printf("enter the number of processes");
+scanf("%d",&p);
+    printf("enter the resorces");
+scanf("%d",&R);
+printf("enter the values\n");
+for(i=0;i<R;i++){
+scanf("%d",&avail[i]);
+}
+printf("enter the values\n");
+for(i=0;i<p;i++){
+for(j=0;j<R;j++){
+scanf("%d",&max[i][j]);
+}
+}
+printf("enter the values\n");
+    for(i=0;i<p;i++){
+    for(j=0;j<R;j++){
+    scanf("%d",&alloc[i][j]);
+          }
+      }
+int need[n][r];
+for(i=0;i<n;i++){
+for(j=0;j<r;j++){
+need[i][j] = max[i][j] - alloc[i][j];
+}
+}
+int flag = 1;
+while(flag){
+flag = 0;
+for(i=0;i<n;i++){
+int c =0;
+for(j=0;j<r;j++){
+if(status[i] == 0 && avail[j] >= need[i][j]){
+c++;
+}
+}
+if(c == r){
+for(k=0;k<r;k++){
+avail[k] = avail[k] + alloc[i][k];
+status[i] = 1;
+printf("p %d",i);
+flag = 1;
+}
+}
+}
+}
+int c1 = 0;
+    for(i=0;i<n;i++){
+if(status[i] == 1)
+c1++;
+}
+if(c1 == n)
+printf("safe");
+else
+printf("unsafe");
+}
